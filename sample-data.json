@@ -1,0 +1,18 @@
+{
+  "user": {"name": "Student", "plan": "Free", "weeklyGoalMinutes": 300},
+  "tasks": [
+    {"title": "Revise quadratic equations", "subject": "Mathematics", "priority": "High", "completed": false},
+    {"title": "Read chapter 4 notes", "subject": "Science", "priority": "Medium", "completed": false},
+    {"title": "Practice essay introduction", "subject": "English", "priority": "Low", "completed": true}
+  ],
+  "sessions": [
+    {"subject": "Mathematics", "day": "Monday", "time": "17:00", "durationMinutes": 45},
+    {"subject": "Science", "day": "Tuesday", "time": "18:00", "durationMinutes": 45},
+    {"subject": "English", "day": "Wednesday", "time": "17:30", "durationMinutes": 30}
+  ],
+  "plans": [
+    {"name": "Free", "priceINRMonthly": 0},
+    {"name": "Plus", "priceINRMonthly": 149},
+    {"name": "Pro", "priceINRMonthly": 299}
+  ]
+}

@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="StudyFlow is a simple study planner for tasks, schedules, focus sessions, and goals." />
+  <title>StudyFlow — Study Planner</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <a class="brand" href="#"><span class="brand-mark">S</span><span>StudyFlow</span></a>
+      <p class="nav-label">WORKSPACE</p>
+      <button class="nav-item active" data-view="overview">◫ <span>Overview</span></button>
+      <button class="nav-item" data-view="tasks">☑ <span>Tasks</span></button>
+      <button class="nav-item" data-view="schedule">▦ <span>Schedule</span></button>
+      <button class="nav-item" data-view="focus">◷ <span>Focus timer</span></button>
+      <div class="sidebar-spacer"></div>
+      <div class="upgrade-card">
+        <span class="sparkle">✦</span>
+        <h3>Make room to grow</h3>
+        <p>Unlock more subjects and advanced insights with StudyFlow Plus.</p>
+        <button id="sidebarUpgrade" class="button button-light button-full">Explore plans</button>
+      </div>
+      <button class="nav-item" data-view="settings">⚙ <span>Settings</span></button>
+      <div class="profile"><div class="avatar">S</div><div><strong id="profileName">Student</strong><small id="profilePlan">Free plan</small></div></div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div><p class="eyebrow" id="todayLabel">YOUR STUDY SPACE</p><h1 id="pageTitle">Good morning, student <span>✦</span></h1></div>
+        <div class="top-actions"><span class="plan-pill" id="planPill">FREE PLAN</span><button class="icon-button" id="profileButton" aria-label="Edit profile">◉</button></div>
+      </header>
+
+      <section class="view active" id="overviewView">
+        <div class="welcome-banner"><div><span class="banner-kicker">A LITTLE PROGRESS ADDS UP</span><h2>Your next big goal starts<br/>with one focused session.</h2><p>Make today count, one task at a time.</p><button class="button button-primary" id="bannerFocus">Start a focus session <span>→</span></button></div><div class="banner-art"><div class="orbit orbit-one"></div><div class="orbit orbit-two"></div><div class="book">✦</div><div class="mini-note">FOCUS<br/><strong>ON YOU</strong></div></div></div>
+        <div class="section-heading"><div><h2>Your overview</h2><p>Here's how your study week is shaping up.</p></div><button class="text-button" data-go="tasks">View all tasks →</button></div>
+        <div class="stats-grid">
+          <article class="stat-card"><div class="stat-top"><span>Tasks completed</span><span class="stat-icon lavender">✓</span></div><strong id="completedStat">0</strong><small><span class="positive" id="taskProgress">0%</span> of your task list</small><div class="progress-track"><div class="progress-fill" id="taskProgressBar"></div></div></article>
+          <article class="stat-card"><div class="stat-top"><span>Study time</span><span class="stat-icon mint">◷</span></div><strong><span id="studyMinutes">0</span><small class="unit"> min</small></strong><small>Total focus time recorded</small><div class="progress-track"><div class="progress-fill mint-fill" id="timeProgressBar"></div></div></article>
+          <article class="stat-card"><div class="stat-top"><span>Current streak</span><span class="stat-icon peach">✦</span></div><strong><span id="streakStat">1</span><small class="unit"> day</small></strong><small>Keep showing up for yourself</small><div class="streak-dots"><i></i><i></i><i></i><i></i><i></i><i></i><i></i></div></article>
+        </div>
+        <div class="content-grid">
+          <article class="panel"><div class="panel-heading"><div><h3>Today's tasks</h3><p>Small wins, big momentum.</p></div><button class="plus-button" id="quickAdd" aria-label="Add task">+</button></div><div id="todayTasks" class="task-list"></div><button class="outline-button button-full" data-go="tasks">Manage all tasks</button></article>
+          <article class="panel"><div class="panel-heading"><div><h3>Weekly focus</h3><p>Your study minutes this week</p></div><span class="chart-label">MINUTES</span></div><div class="chart" id="weeklyChart" aria-label="Weekly study minutes chart"></div><div class="chart-footer"><span>Weekly goal</span><strong id="weeklyGoalLabel">300 min</strong></div><div class="progress-track"><div class="progress-fill mint-fill" id="weeklyGoalBar"></div></div></article>
+        </div>
+      </section>
+
+      <section class="view" id="tasksView">
+        <div class="section-heading"><div><h2>Tasks & assignments</h2><p>Keep every deadline in one calm place.</p></div><button class="button button-primary" id="addTaskButton">+ Add task</button></div>
+        <div class="filter-row"><button class="filter active" data-filter="all">All tasks</button><button class="filter" data-filter="open">To do</button><button class="filter" data-filter="done">Completed</button></div>
+        <div class="panel"><div id="allTasks" class="task-list full-task-list"></div></div>
+      </section>
+
+      <section class="view" id="scheduleView">
+        <div class="section-heading"><div><h2>Study schedule</h2><p>A flexible plan beats a perfect plan.</p></div><button class="button button-primary" id="addSessionButton">+ Add session</button></div>
+        <div class="schedule-grid" id="scheduleGrid"></div>
+      </section>
+
+      <section class="view" id="focusView">
+        <div class="focus-layout"><article class="panel focus-panel"><span class="banner-kicker">DEEP WORK MODE</span><h2>One thing at a time.</h2><p>Choose a duration, put distractions away, and begin.</p><div class="timer-ring"><div><strong id="timerDisplay">25:00</strong><span id="timerState">READY TO FOCUS</span></div></div><div class="timer-presets"><button class="preset active" data-minutes="25">25 min</button><button class="preset" data-minutes="45">45 min</button><button class="preset" data-minutes="60">60 min</button></div><div class="timer-actions"><button class="button button-primary" id="timerStart">Start focus</button><button class="outline-button" id="timerReset">Reset</button></div><p class="fine-print">Focus time is recorded when a session finishes.</p></article><article class="panel focus-tips"><h3>Make it easier to focus</h3><div class="tip"><span>01</span><div><strong>Pick one clear task</strong><p>Write down what “done” looks like before you start.</p></div></div><div class="tip"><span>02</span><div><strong>Reduce the noise</strong><p>Silence notifications and keep only what you need nearby.</p></div></div><div class="tip"><span>03</span><div><strong>Take a real break</strong><p>Stretch, drink water, and give your mind a reset.</p></div></div></article></div>
+      </section>
+
+      <section class="view" id="settingsView">
+        <div class="section-heading"><div><h2>Settings</h2><p>Make StudyFlow work for you.</p></div></div>
+        <div class="settings-grid"><article class="panel"><h3>Your profile</h3><label class="field-label" for="nameInput">Display name</label><input id="nameInput" class="field" placeholder="Your name" maxlength="40"/><label class="field-label" for="goalInput">Weekly study goal (minutes)</label><input id="goalInput" class="field" type="number" min="30" max="5000" value="300"/><button class="button button-primary" id="saveSettings">Save settings</button></article><article class="panel"><h3>Subscription</h3><p class="muted">Current plan: <strong id="settingsPlan">Free</strong></p><p>Upgrade to unlock higher limits and extra insights. This student demo uses simulated checkout only.</p><button class="button button-primary" id="settingsUpgrade">Compare plans</button></article></div>
+      </section>
+
+      <section class="view" id="plansView">
+        <div class="section-heading"><div><h2>Plans that grow with you</h2><p>Start free. Upgrade when you need more room.</p></div><button class="text-button" data-go="overview">← Back to dashboard</button></div>
+        <div class="pricing-grid">
+          <article class="price-card"><span class="price-tag">START HERE</span><h3>Free</h3><p class="price">₹0 <small>/ forever</small></p><p>Build a steady study habit.</p><ul><li>✓ Up to 5 active tasks</li><li>✓ 3 study subjects</li><li>✓ Focus timer</li><li>✓ Basic weekly progress</li></ul><button class="outline-button button-full" id="freePlanButton">Current starter plan</button></article>
+          <article class="price-card featured"><span class="price-tag">MOST POPULAR</span><h3>Plus</h3><p class="price">₹149 <small>/ month</small></p><p>More structure for bigger goals.</p><ul><li>✓ Unlimited tasks</li><li>✓ Unlimited subjects</li><li>✓ Advanced progress insights</li><li>✓ Custom study goals</li><li>✓ Priority feature access</li></ul><button class="button button-primary button-full" data-plan="Plus">Try demo upgrade</button></article>
+          <article class="price-card"><span class="price-tag">FOR INTENSIVE STUDY</span><h3>Pro</h3><p class="price">₹299 <small>/ month</small></p><p>Your full study command center.</p><ul><li>✓ Everything in Plus</li><li>✓ Exam countdowns</li><li>✓ Smart schedule templates</li><li>✓ Exportable reports</li></ul><button class="outline-button button-full" data-plan="Pro">Try demo upgrade</button></article>
+        </div>
+        <p class="fine-print centered">Demo checkout only — no money is charged and no real subscription is created.</p>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="taskDialog" class="modal"><form id="taskForm" method="dialog"><div class="modal-heading"><div><h2 id="taskDialogTitle">Add a task</h2><p>Make your next step clear and doable.</p></div><button type="button" class="close-button" data-close="taskDialog">×</button></div><label class="field-label" for="taskTitle">Task name</label><input id="taskTitle" class="field" required maxlength="100" placeholder="e.g. Revise algebra chapter"/><div class="form-row"><div><label class="field-label" for="taskSubject">Subject</label><select id="taskSubject" class="field"><option>Mathematics</option><option>Science</option><option>English</option><option>Computer Science</option><option>History</option><option>Other</option></select></div><div><label class="field-label" for="taskDue">Due date</label><input id="taskDue" class="field" type="date"/></div></div><label class="field-label" for="taskPriority">Priority</label><select id="taskPriority" class="field"><option>Medium</option><option>High</option><option>Low</option></select><div class="modal-actions"><button type="button" class="outline-button" data-close="taskDialog">Cancel</button><button type="submit" class="button button-primary">Save task</button></div></form></dialog>
+  <dialog id="sessionDialog" class="modal"><form id="sessionForm" method="dialog"><div class="modal-heading"><div><h2>Add a study session</h2><p>Give your study time a place in the week.</p></div><button type="button" class="close-button" data-close="sessionDialog">×</button></div><label class="field-label" for="sessionSubject">Subject</label><input id="sessionSubject" class="field" required maxlength="60" placeholder="e.g. Physics"/><div class="form-row"><div><label class="field-label" for="sessionDay">Day</label><select id="sessionDay" class="field"><option>Monday</option><option>Tuesday</option><option>Wednesday</option><option>Thursday</option><option>Friday</option><option>Saturday</option><option>Sunday</option></select></div><div><label class="field-label" for="sessionTime">Time</label><input id="sessionTime" class="field" type="time" value="17:00" required/></div></div><label class="field-label" for="sessionDuration">Duration (minutes)</label><input id="sessionDuration" class="field" type="number" min="10" max="240" value="45" required/><div class="modal-actions"><button type="button" class="outline-button" data-close="sessionDialog">Cancel</button><button type="submit" class="button button-primary">Save session</button></div></form></dialog>
+  <dialog id="checkoutDialog" class="modal"><form id="checkoutForm" method="dialog"><div class="modal-heading"><div><h2>Demo checkout</h2><p>Explore how a subscription upgrade could work.</p></div><button type="button" class="close-button" data-close="checkoutDialog">×</button></div><div class="checkout-summary"><span>Selected plan</span><strong id="checkoutPlan">Plus</strong><strong class="checkout-price" id="checkoutPrice">₹149 / month</strong></div><div class="demo-notice">ⓘ This is a simulated payment flow for a student project. No card details are collected and no money will be charged.</div><label class="checkbox-label"><input type="checkbox" id="agreeDemo" required/> I understand this is a demo subscription.</label><div class="modal-actions"><button type="button" class="outline-button" data-close="checkoutDialog">Cancel</button><button type="submit" class="button button-primary">Confirm demo upgrade</button></div></form></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <script src="app.js"></script>
+</body>
+</html>
